@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <ranges>
+#include <algorithm>
 using namespace std;
 
 // write ``error: s'' and exit program
