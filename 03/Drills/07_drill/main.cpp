@@ -9,17 +9,10 @@ int main() {
     string mesurement;
     bool isInitialized= false;
     string tmp;
-    // cin >> tmp;
-    // tmpNumber= stod(tmp);
-    // cout << tmpNumber;
-    // exit(0);
     while (true) {
-	cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 	cout << "Enter number with measurement: ";
-	cin >> tmp;
+	std::getline(std::cin, tmp);
 	if (tmp.find("|") != string::npos) break;
-	// std::string str = "The value is 3.14";
 	size_t pos = tmp.find_first_of("0123456789");
 	if (pos != std::string::npos) {
 	    size_t endPos = tmp.find_first_not_of("0123456789.", pos);
@@ -27,19 +20,11 @@ int main() {
 		endPos = tmp.length();
 	    }
 	    tmpNumber = std::stod(tmp.substr(pos, endPos - pos));
-	    // Use the value
 	} else {
 	    cout << "Error!\n";
 	    continue;
 	}
 
-	// try {
-	//     tmpNumber= stod(tmp);
-	// } catch (std::invalid_argument) {
-	//     cout << "Wrong input!\n";
-	//     continue;
-	// }
-	// cin >> mesurement;
 	double multiplier= 1;
 	if (tmp.find("cm") != string::npos) {
 	    multiplier= 1;
