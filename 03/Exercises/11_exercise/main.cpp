@@ -6,42 +6,48 @@
 #define PAPER 'p'
 #define SCISSORS 's'
 
-bool playerWinP(char, char);
+enum GameStatus {Win, Lose, Draw};
+GameStatus playerWinP(char, char);
 char intToChoice(int);
 
 int main() {
-    for (int i = 0; i < 10; i++) {
-	cout << rand() % 3 << '\n';
-    }
     char userInput;
     while (!cin.eof()) {
 	cout << "Enter [R]ock/[P]aper/[S]cissors:";
 	cin >> userInput;
 	char computerChoice = intToChoice(rand() % 3);
-	if (playerWinP(computerChoice, userInput)) {
+	GameStatus gameResult = playerWinP(computerChoice, userInput);
+	switch (gameResult) {
+	case GameStatus::Win:
 	    cout << "You win!\n";
-	} else {
+	    break;
+	case GameStatus::Draw:
+	    cout << "Draw!\n";
+	    break;
+	case GameStatus::Lose:
 	    cout << "You lose!\n";
+	    break;
+	default:
+	    break;
 	}
 	cout << "My choice was: " << computerChoice << '\n';
     }
 }
 
-bool playerWinP(char inputComputer, char inputPlayer) {
+GameStatus playerWinP(char inputComputer, char inputPlayer) {
     /* R --- Rock,
        P --- Paper,
        S --- Scissors
     */
-    if ((ROCK) == inputComputer && (PAPER) == inputPlayer) {
-	return true;
+    if (((ROCK) == inputComputer && (PAPER) == inputPlayer) ||
+	((PAPER) == inputComputer && (SCISSORS) == inputPlayer) ||
+	((SCISSORS) == inputComputer && (ROCK) == inputPlayer)) {
+	return GameStatus::Win;
     }
-    if ((PAPER) == inputComputer && (SCISSORS) == inputPlayer) {
-	return true;
+    if (inputComputer == inputPlayer) {
+	return GameStatus::Draw;
     }
-    if ((SCISSORS) == inputComputer && (ROCK) == inputPlayer) {
-	return true;
-    }
-    return false;
+    return GameStatus::Lose;
 }
 char intToChoice(int inputNum) {
     if (0 == inputNum) {return 'r';}
