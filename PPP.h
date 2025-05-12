@@ -4,6 +4,8 @@
 #include <vector>
 #include <ranges>
 #include <algorithm>
+#include <map>
+
 using namespace std;
 
 // write ``error: s'' and exit program
