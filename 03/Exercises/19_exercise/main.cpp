@@ -1,4 +1,5 @@
 #include "../../../PPP.h"
+#include <sstream>
 
 bool presentP(vector<string>*, string);
 void printLists(vector<string>*, vector<int>*);
@@ -7,6 +8,12 @@ int main() {
     string someString;
     getline(cin, someString);
     cout << someString << '\n';
+    int score2;
+    string name2;
+    std::istringstream some_stream(someString);
+    some_stream >> name2 >> score2;
+    cout << name2 << ' ' << score2 << '\n';
+    // std::find_if(someString.begin(), someString.end(), [](unsigned char c) {return std::isdigit(c);});
     return 0;
     vector<string> names;
     vector<int> scores;
