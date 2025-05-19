@@ -3,18 +3,9 @@
 
 bool presentP(vector<string>*, string);
 void printLists(vector<string>*, vector<int>*);
+int searchName(vector<string>*, const string*);
 
 int main() {
-    string someString;
-    getline(cin, someString);
-    cout << someString << '\n';
-    int score2;
-    string name2;
-    std::istringstream some_stream(someString);
-    some_stream >> name2 >> score2;
-    cout << name2 << ' ' << score2 << '\n';
-    // std::find_if(someString.begin(), someString.end(), [](unsigned char c) {return std::isdigit(c);});
-    return 0;
     vector<string> names;
     vector<int> scores;
 
@@ -32,6 +23,18 @@ int main() {
 	scores.push_back(score);
     }
     printLists(&names, &scores);
+    while (true) {
+	cout << "Enter name or [NoName] for exit: ";
+	cin >> name;
+	if (name == "NoName" && score == 0) {break;}
+	int nameIndex = searchName(&names, &name);
+	if (nameIndex > -1) {
+	    cout << "User: " << names[nameIndex] << ", Score: "
+		 << scores[nameIndex] << '\n';
+	} else {
+	    cout << "Name '" << name <<"' not found!\n";
+	}
+    }
 }
 
 bool presentP(vector<string>* inputVector, string element) {
@@ -52,4 +55,12 @@ void printLists(vector<string>* inputNames, vector<int>* inputScores) {
 	    {cout << "[No score]";}
 	cout << '\n';
     }
+}
+
+int searchName(vector<string>* inputVector, const string* inputName) {
+    size_t vectorSize = inputVector->size();
+    for (size_t i = 0; i < vectorSize; i++) {
+	if (*inputName == (*inputVector)[i]) {return i;}
+    }
+    return (-1);
 }
