@@ -19,3 +19,8 @@ inline void simple_error(const string* s)
 inline void error(const string* s) {
   return simple_error(s);
 }
+
+inline void error(const char* msg) {
+    cerr << msg << '\n';
+    exit(1);
+}
