@@ -24,3 +24,7 @@ inline void error(const char* msg) {
     cerr << msg << '\n';
     exit(1);
 }
+
+inline void expect(bool cond, std::string mess) {
+    if (!cond) {error(&mess);}
+}
